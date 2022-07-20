@@ -7,7 +7,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNull;
 
 public class TopicServiceTest {
-
     @Test
     public void whenTopic() {
         TopicService topicService = new TopicService();
