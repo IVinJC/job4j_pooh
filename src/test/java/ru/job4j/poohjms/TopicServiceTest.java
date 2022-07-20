@@ -14,6 +14,7 @@ public class TopicServiceTest {
         String paramForPublisher = "temperature=18";
         String paramForSubscriber1 = "client407";
         String paramForSubscriber2 = "client6565";
+
         /** Режим topic. Подписываемся на топик weather. client407. */
         topicService.process(
                 new Req("GET", "topic", "weather", paramForSubscriber1)
