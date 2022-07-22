@@ -7,17 +7,14 @@ public class QueueService implements Service {
     private final ConcurrentHashMap<String, ConcurrentLinkedQueue<String>> map = new ConcurrentHashMap<>();
     @Override
     public Resp process(Req req) {
-        Resp resp = new Resp(null, null);
+        Resp resp = new Resp("", "501");
         if ("POST".equals(req.httpRequestType())) {
             ConcurrentLinkedQueue<String> queue = new ConcurrentLinkedQueue<>();
             queue.add(req.getParam());
             map.putIfAbsent(req.getSourceName(), queue);
-            resp = new Resp("OK", "200");
         } else if ("GET".equals(req.httpRequestType())) {
-            if (!map.isEmpty()) {
-                String poll = map.get(req.getSourceName()).poll();
-                resp = poll == null ? new Resp("", "204") : new Resp(poll, "200");
-            }
+            String poll = map.getOrDefault(req.getSourceName(), new ConcurrentLinkedQueue<>()).poll();
+            resp = poll == null ? new Resp("", "204") : new Resp(poll, "200");
         }
         return resp;
     }

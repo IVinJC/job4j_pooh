@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNull;
 
 public class QueueServiceTest {
 
@@ -27,8 +26,8 @@ public class QueueServiceTest {
     public void whenGetFromEmptyQueue() {
         QueueService queueService = new QueueService();
         Resp result = queueService.process(
-                new Req("GET", "queue", "weather", null)
+                new Req("GET", "queue", "weather", "")
         );
-        assertNull(result.text());
+        assertThat(result.text(), is(""));
     }
 }
