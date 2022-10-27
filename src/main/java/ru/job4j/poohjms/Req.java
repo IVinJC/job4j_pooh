@@ -1,7 +1,6 @@
 package ru.job4j.poohjms;
 
 public class Req {
-
     private final String httpRequestType;
     private final String poohMode;
     private final String sourceName;

@@ -1,5 +1,6 @@
 package ru.job4j.poohjms;
 
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -9,7 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+@Slf4j
 public class PoohServer {
     private final HashMap<String, Service> modes = new HashMap<>();
 
@@ -34,12 +35,12 @@ public class PoohServer {
                         out.write(("HTTP/1.1 " + resp.status() + ls).getBytes());
                         out.write((resp.text().concat(ls)).getBytes());
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        log.error("Error writing response: " + e.getMessage(), e);
                     }
                 });
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error IOException: " + e.getMessage(), e);
         }
     }
 
